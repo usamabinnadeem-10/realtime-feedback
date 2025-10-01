@@ -84,32 +84,32 @@ export default function FeedbackList({ initialFeedback, currentUserId }: Feedbac
       ) : (
         <div className="grid gap-4">
           {feedback.map((item) => (
-            <div key={item.id} className="bg-white shadow-md hover:shadow-lg rounded-xl p-6 border border-gray-100 transition-all duration-200">
-              <div className="flex justify-between items-start mb-3">
-                <div className="flex items-start gap-3 flex-1">
-                  <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    {item.user_email.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{item.title}</h3>
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <span className="font-medium text-gray-700">{item.user_email}</span>
-                      <span>•</span>
-                      <span>{formatDate(item.created_at)}</span>
-                    </div>
-                  </div>
+            <div key={item.id} className="bg-white shadow-md hover:shadow-lg rounded-xl p-4 sm:p-6 border border-gray-100 transition-all duration-200">
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                  {item.user_email.charAt(0).toUpperCase()}
                 </div>
-                {currentUserId === item.user_id && (
-                  <button
-                    onClick={() => handleDelete(item.id)}
-                    disabled={deleting === item.id}
-                    className="ml-4 px-3 py-1.5 text-sm font-medium text-red-600 hover:text-white hover:bg-red-600 border border-red-600 rounded-lg disabled:opacity-50 transition-all"
-                  >
-                    {deleting === item.id ? 'Deleting...' : 'Delete'}
-                  </button>
-                )}
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-start justify-between gap-2 mb-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 break-words">{item.title}</h3>
+                    {currentUserId === item.user_id && (
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        disabled={deleting === item.id}
+                        className="flex-shrink-0 px-2 sm:px-3 py-1.5 text-xs sm:text-sm font-medium text-red-600 hover:text-white hover:bg-red-600 border border-red-600 rounded-lg disabled:opacity-50 transition-all"
+                      >
+                        {deleting === item.id ? 'Deleting...' : 'Delete'}
+                      </button>
+                    )}
+                  </div>
+                  <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs sm:text-sm text-gray-500 mb-2">
+                    <span className="font-medium text-gray-700 truncate max-w-[200px]">{item.user_email}</span>
+                    <span className="hidden sm:inline">•</span>
+                    <span className="text-xs">{formatDate(item.created_at)}</span>
+                  </div>
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-wrap break-words">{item.description}</p>
+                </div>
               </div>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap pl-13">{item.description}</p>
             </div>
           ))}
         </div>
